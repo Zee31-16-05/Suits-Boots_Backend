@@ -6,7 +6,9 @@ router.post('/create-user', function(req, res) {
     return addUserController.addUser(req, res)
 })
 
-
+// router.get('/getAll-user',function(req,res){
+//     return addUserController.getAllUser(req, res)
+// })
 
 
 
