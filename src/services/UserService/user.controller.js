@@ -3,16 +3,19 @@ const queries = require('../Queries/queries')
 
 exports.addUser = async(req,res,next)=>{
     try{
-        console.log("inside createUser API controller-------");
 
-        const {userId, username, emailId, phone, password} = req.body
-        console.log("my rquest body of user",req.body);
-        db.query(queries.createUser,[userId, username, emailId, phone, password],(err,result)=>{
+        // const {id, userName, email, phone, password} = req.body
+        const reqBodyData  = req.body
+        // console.log("reqBodyData: ",reqBodyData)
+        let Data = Object.keys(reqBodyData)
+
+        db.query(queries.createUser,Data,(err,result)=>{
             if (err) {
-                res.status(500).send('Error inserting user into database');
+                console.log("error creating user---------",err.stack);
+                res.status(500).json(err);
             } else {
-                console.log("data of new user into database------",result);
-                res.status(201).send('User inserted successfully in database');
+                console.log("data of new user Added into database------",result);
+                res.status(200).json(result);
             }
         })
     }
